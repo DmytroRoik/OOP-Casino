@@ -1,0 +1,32 @@
+section{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	align-content: space-between;
+	border:1px solid red;
+}
+.slotMachine{
+	width:100px;
+	border:1px solid red;
+	margin: 15px;
+	padding: 10px;
+}
+
+#modalWindow{
+	display:flex;
+	flex-direction: column;
+	text-align: center;
+}
+.slots{
+	display: flex;
+	justify-content: space-around;
+}
+.slotNumber{
+	border:1px solid red;
+	height: 50px;
+	min-width: 30px;
+	padding: 10px;
+	margin: 30px;
+}
+
