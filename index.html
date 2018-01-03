@@ -6,10 +6,14 @@
 	<link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-	<section id="slots">
+	<section >
+		<div id="slots">
 
+		</div>
+		<button onclick="addSlot()">Add New Slot</button>
 	</section>
 	<section id="modalWindow" class="hidden">
+		<button class="btnClose">X</button>
 		<div>
 			<h2>Slot: <span>0</span></h2>
 			<h4>Monney in Slot: <span>0</span></h4>
@@ -19,8 +23,15 @@
 			<div class="slotNumber">1</div>
 			<div class="slotNumber">2</div>
 			<div class="slotNumber">3</div>
-			<button class="btnPlay">Play</button>
+			<button class="btnPlay" disabled>Play</button>
 		</div>
+
+		<form id="usersBet">
+			<label for="inpUserMoney">User`s Bet: </label>
+			<input type="number" id="inpUserMoney" min="1" value="1">
+			<input type="submit" class="btn" value="Insert Money">
+		</form>
+
 
 
 	</section>

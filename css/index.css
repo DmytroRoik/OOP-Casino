@@ -1,4 +1,4 @@
-section{
+#slots{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -6,19 +6,64 @@ section{
 	align-content: space-between;
 	border:1px solid red;
 }
+.btn-pulse{
+	border-radius: 7px;
+	color:white;
+	padding: 3px;
+	background-color: darkred;
+	box-shadow: 0 0 0 0 blue;
+	animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1); }
+}
+.btn-pulse:hover{
+    background-color: transparent;
+ }
+ .btnClose{
+	width: 25px;
+ 	height: 25px;
+	order:3;
+	margin-right: 0%;
+}
+ .btnClose:hover{
+ 	background-color: red;
+ 	color:white;
+ }
+
 .slotMachine{
 	width:100px;
-	border:1px solid red;
+	height: 170px;
 	margin: 15px;
-	padding: 10px;
+	padding: 20px;
+	background-color: lightgrey;
+	border-radius:5px;
 }
+.slotMachine button{
+	opacity: 0;
+}
+.slotMachine:hover{
+	background-color: rgba(190,200,129,.9);
+	border-radius: 5px;
+}
+.slotMachine:hover h3,.slotMachine:hover h4{
+	display: none;
+}
+.slotMachine:hover button{
+	opacity: 1;
+	margin: 15% 25%;
+	width: 50%;
+	transform: scale(2);
 
+}
+#modalWindow.hidden{
+	display:none;
+}
 #modalWindow{
 	display:flex;
-	flex-direction: column;
+	flex-direction: row;
 	text-align: center;
+	justify-content: space-around;
 }
 .slots{
+	border:1px solid red;
 	display: flex;
 	justify-content: space-around;
 }
@@ -29,4 +74,9 @@ section{
 	padding: 10px;
 	margin: 30px;
 }
+
+@keyframes pulse {
+	to {
+		-webkit-box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+		box-shadow: 0 0 0 10px rgba(232, 76, 61, 0); } }
 

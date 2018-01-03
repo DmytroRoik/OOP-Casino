@@ -35,7 +35,6 @@ SlotMachine.prototype.insertMoney = function(number){
 SlotMachine.prototype.play = function(number){
 	if(isNaN(number)||number<=0)
 		return new Error('number is NAN or <= 0');
-	this.insertMoney(number);
 	var randNumber=[],
 	winMoney=0;
 	if(this.getLucky()){
@@ -59,7 +58,7 @@ SlotMachine.prototype.play = function(number){
 		winMoney=this.removeMoney(number*2);
 	}
 	else{//lose
-		winMoney=-number;
+		winMoney= -number;
 	}
 	return {winMoney: +winMoney,randNumber:randNumber};
 };

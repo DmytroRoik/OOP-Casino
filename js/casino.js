@@ -30,14 +30,15 @@ Casino.prototype.addNewSlot = function() {
 	this.getSlotMachines().push(new SlotMachine(bigestSum-temp));
 };
 Casino.prototype.removeSlot = function(number) {
-	var sum=this.getSlotMachines()[number].getMoney();
-	this.getSlotMachines()[number]=null;
+	if(this.getCountSlotMachine()==1)throw new Error("You can`t delete last slot");
+	var sum=this.getSlotMachines()[number-1].getMoney();
+	this.getSlotMachines().splice(number-1,1);
 	var avgSum=(sum/this.getCountSlotMachine()).toFixed();
-	for (var i = getSlotMachines().length - 1; i > 0; i--) {
-		getSlotMachines()[i].insertMoney(avgSum);
+	for (var i = this.getSlotMachines().length - 1; i > 0; i--) {
+		this.getSlotMachines()[i].insertMoney(avgSum);
 		sum-=avgSum;
 	}
-	getSlotMachines()[0].insertMoney(sum);
+	this.getSlotMachines()[0].insertMoney(sum);
 };
 Casino.prototype.RemoveMoney = function(number) {
 	if(number>=this.getMoney())return new Error('casino don`t have this money');
