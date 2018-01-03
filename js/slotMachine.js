@@ -9,7 +9,7 @@ function SlotMachine(startMoney){
 		return _money;
 	}
 	this.setMoney=function(number){
-		_money=number;
+		_money= +number;
 	}
 
 	this.getLucky=function () {
@@ -24,13 +24,13 @@ SlotMachine.prototype.removeMoney = function(number){
 		return new Error('number is NAN or <= 0');
 		if(number<=this.getMoney()){
 			this.setMoney( this.getMoney()-number);
-			return number;
+			return +number;
 		}
 };
 SlotMachine.prototype.insertMoney = function(number){
 	if(isNaN(number)||number<=0)
 		return new Error('number is NAN or <= 0');
-	this.setMoney(this.getMoney()+number);
+	this.setMoney(this.getMoney()+ parseInt(number));
 };
 SlotMachine.prototype.play = function(number){
 	if(isNaN(number)||number<=0)
@@ -47,7 +47,7 @@ SlotMachine.prototype.play = function(number){
 			if(randNumber[i]>9)randNumber[i]=9;
 		}
 	}
-	console.log(randNumber);
+
 	if(randNumber.toString()==[7,7,7].toString()){//win
 		winMoney=this.removeMoney(+this.getMoney());
 	}
@@ -59,9 +59,7 @@ SlotMachine.prototype.play = function(number){
 		winMoney=this.removeMoney(number*2);
 	}
 	else{//lose
-		this.insertMoney(number);
 		winMoney=-number;
-		//console.log(-number);
 	}
-	return winMoney;
+	return {winMoney: +winMoney,randNumber:randNumber};
 };

@@ -31,7 +31,7 @@ Casino.prototype.addNewSlot = function() {
 };
 Casino.prototype.removeSlot = function(number) {
 	var sum=this.getSlotMachines()[number].getMoney();
-	this.getSlotMachines().splice(number,1);
+	this.getSlotMachines()[number]=null;
 	var avgSum=(sum/this.getCountSlotMachine()).toFixed();
 	for (var i = getSlotMachines().length - 1; i > 0; i--) {
 		getSlotMachines()[i].insertMoney(avgSum);
