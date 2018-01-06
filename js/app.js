@@ -51,7 +51,30 @@ var init=(function(){
 	});
 
 })();
-updateSlots();
+//updateSlots();
+
+function createCasino(){
+	var errors=[];
+	var countSlots=document.getElementById('inputCasinoSlots').value;
+	var casinoMoney=document.getElementById('inputCasinoMoney').value;
+	if(!isNumberValid(countSlots)){
+		errors.push('count of slots');
+	}
+	else if(!isNumberValid(casinoMoney)){
+		errors.push('casino money');
+	}
+	if(errors.length==0){
+		casino=new Casino(countSlots,casinoMoney);
+		updateSlots();
+	}
+	else alert('Some values ('+errors.join(',')+') are incorrect');
+}
+function createPlayer () {
+	var playerMoney=document.getElementById('inputPlayerMoney').value;
+	if(!isNumberValid(playerMoney)){
+		alert('Player`s money is incorrect');
+	}else user.money=playerMoney;
+}
 function nextSlots(){
 	 curIndex+=slotStep;
 	showFewSlots(curIndex,slotStep);
@@ -74,11 +97,13 @@ function showFewSlots (index,count) {
 	}
 }
 function isNumberValid (number) {
+	if(number.length==0)return false;
 	for(let i=0;i<number.length;i++){
 		if(!/^[0-9]/.test(number[i]))return false;
 	}
 	return true;
 }
+
 function createSlotMachineTemplate (slotMachine,index) {
 	var $divSlot= document.createElement('div');
 	$divSlot.classList.add('slotMachine');
@@ -134,7 +159,7 @@ function updateSlots() {
 	$slotsContainer.innerHTML='';
 	for (var i = 0; i< casino.getSlotMachines().length;i++) {
 		var el=casino.getSlotMachines()[i];
-		if(el!=null){
+		if(el){
 			$slotsContainer.append(createSlotMachineTemplate(el,i+1));
 		}
 	}
