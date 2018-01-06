@@ -6,9 +6,38 @@
 	<link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-	<section >
-		<div id="slots">
+	<header>
+		<ul class="casino">
+			<li><h2>Casino:</h2></li>
+			<li class="info-money">
+				<label for="inputCasinoMoney">Money in Casino:</label>
+				<input type="number" id="inputCasinoMoney" >
+			</li>
+			<li class="casino-SlotsNumber">
+				<label for="inputCasinoSlots">Casino Slots:</label>
+				<input type="number" min="1" id="inputCasinoSlots">
+			</li>
+			<button onclick="createCasino()" class="createObj">Create Casino</button>
+		</ul>
+		<ul class="player">
+			<li>
+				<h2>Player:</h2>
+			</li>
+			<li class="info-money">
+				<label for="inputPlayerMoney">Player Money: <input type="number" min="1"> </label>
+			</li>
+			<li><button class="createObj">Change Player</button> </li>
+		</ul>
+	</header>
+	<section class="container">
+		<h1>Slots</h1>
+		<div class="divslotContainer">
+			<button class="btn-prev" onclick="prevSlots()">back</button>
 
+			<div id="slots" class="container">
+
+			</div>
+			<button class="btn-next" onclick="nextSlots()">Next</button>
 		</div>
 		<button onclick="addSlot()">Add New Slot</button>
 	</section>

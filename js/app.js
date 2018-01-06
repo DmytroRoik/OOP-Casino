@@ -8,10 +8,14 @@ var user={
 		if(money>0)	this.money+= +money;
 	}
 }
+
 var casino= new Casino(5,1000);
 var currentSlotMachine=null;
 var currentSlotIndex=null;
 var userBet=0;
+
+var slotStep=3;//for showing only some slots
+var curIndex=0;
 
 var $sectionSlots=document.getElementById('slots');
 var $modalWindow= document.getElementById('modalWindow');
@@ -48,6 +52,33 @@ var init=(function(){
 
 })();
 updateSlots();
+function nextSlots(){
+	 curIndex+=slotStep;
+	showFewSlots(curIndex,slotStep);
+}
+function prevSlots() {
+	if(curIndex-slotStep>=0)curIndex-=slotStep;
+	showFewSlots(curIndex,slotStep);
+}
+function showFewSlots (index,count) {
+	var $slots=document.getElementsByClassName('slotMachine');
+	if(index>=$slots.length)curIndex=index-=count;
+	console.log(index,count);
+	for($el of $slots){
+		$el.classList.add('hidden');
+	}
+	for(let i=index;i<index+count;i++){
+		if($slots[i]){
+			$slots[i].classList.remove('hidden');
+		}
+	}
+}
+function isNumberValid (number) {
+	for(let i=0;i<number.length;i++){
+		if(!/^[0-9]/.test(number[i]))return false;
+	}
+	return true;
+}
 function createSlotMachineTemplate (slotMachine,index) {
 	var $divSlot= document.createElement('div');
 	$divSlot.classList.add('slotMachine');
@@ -57,7 +88,7 @@ function createSlotMachineTemplate (slotMachine,index) {
 	var $headerMoneyCount=document.createElement('h4');
 	$headerMoneyCount.innerText="Money: "+slotMachine.getMoney();
 	var $btnPlay=document.createElement('button');
-	$btnPlay.innerText="Choose";
+	$btnPlay.innerText="Play";
 	$btnPlay.classList.add('btn-pulse');
 	$btnPlay.addEventListener('click',function(){
 		chooseSlotMachine(slotMachine,index)
@@ -90,6 +121,7 @@ function startRuletka (userMoney) {
 	var ruletka=$modalWindow.querySelectorAll('.slots .slotNumber');
 	var result = currentSlotMachine.play(userMoney);
 
+//add ruletka
 	ruletka[0].innerHTML=result.randNumber[0];
 	ruletka[1].innerHTML=result.randNumber[1];
 	ruletka[2].innerHTML=result.randNumber[2];
@@ -106,6 +138,7 @@ function updateSlots() {
 			$slotsContainer.append(createSlotMachineTemplate(el,i+1));
 		}
 	}
+	showFewSlots(curIndex,slotStep);
 }
 function updateCurrentSlotMoney(){
 	var $spans=$modalWindow.querySelectorAll('span');
@@ -117,5 +150,5 @@ function updateCurrentSlotMoney(){
 function addSlot(){
 	casino.addNewSlot();
 	updateSlots();
-	updateCurrentSlotMoney();
+	//updateCurrentSlotMoney();
 }
