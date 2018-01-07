@@ -86,16 +86,6 @@ margin: 5px;
 .btn-pulse:hover{
     background-color: transparent;
  }
- .btnClose{
-	width: 25px;
- 	height: 25px;
-	order:3;
-	margin-right: 0%;
-}
- .btnClose:hover{
- 	background-color: red;
- 	color:white;
- }
 
 .slotMachine{
 	width:100px;
@@ -139,16 +129,52 @@ margin: 5px;
 }
 .modalWindow-container{
   display:flex;
-  background-color: green;
+  background-color: darkgreen;
+  color: white;
+  font-size: 18px;
   flex-direction:column;
   text-align: center;
   width: 70%;
-  height: 30vh;
+  min-width: 300px;
+  height: 40vh;
 }
+.btnClose{
+  width: 25px;
+  height: 25px;
+  margin: 5px;
+  align-self: flex-end;
+}
+
+ .btnPlay{
+  padding: 10px;
+  font-size: 25px;
+}
+ .btnPlay:hover{
+  background-color: red;
+  color:white;
+ }
+ .btnPlay:disabled{
+  animation: none;
+  background-color: lightgrey;
+ }
+ .info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+ }
+ .info span{
+  color:white;
+  font-weight: bold;
+ }
+
 .slots{
   background-color: grey;
 	display: flex;
-	justify-content: space-around;
+  flex-direction: row;
+	justify-content: center;
+  margin:0;
+  border:1px solid red;
+  height: 100px;
 }
 .slotNumber{
   background-image: url(../img/slotNumbers.png);
@@ -156,11 +182,17 @@ margin: 5px;
 
   background-position-y: 800px;
   background-position-x: 2px;
-
+  margin:10px 40px;
 	height: 50px;
-	min-width: 30px;
+  min-width: 30px;
 	padding: 10px;
-	margin: 30px;
+}
+#usersBet{
+margin-top: 40px;
+}
+#usersBet input,#usersBet label{
+  font-size: 20px;
+  padding: 5px;
 }
 
 @keyframes pulse {
