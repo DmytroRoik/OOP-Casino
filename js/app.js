@@ -9,7 +9,8 @@ var user={
 	}
 }
 
-var casino= new Casino(5,1000);
+var casino=new Casino(2,1000);
+
 var currentSlotMachine=null;
 var currentSlotIndex=null;
 var userBet=0;
@@ -35,9 +36,7 @@ var init=(function(){
 		user.insertMoneyIntoSlot(currentSlotMachine,parseInt($inputUserBet.value));
 		$modalBtnPlay.disabled=false;
 		$inputUserBet.value=1;
-
 		updateCurrentSlotMoney();
-
 	});
 	$modalBtnPlay.addEventListener('click',function () {
 		this.disabled=true;
@@ -46,25 +45,28 @@ var init=(function(){
 		updateCurrentSlotMoney();
 	});
 	$btnCloseModalWindow.addEventListener('click', function () {
-		console.log(this);
 		$modalWindow.classList.add('hidden');
 	});
 
 })();
-//updateSlots();
 
 function createCasino(){
 	var errors=[];
 	var countSlots=document.getElementById('inputCasinoSlots').value;
 	var casinoMoney=document.getElementById('inputCasinoMoney').value;
-	if(!isNumberValid(countSlots)){
+	if(!isNumberValid(casinoMoney)){
+		errors.push('casino money');
+	}
+	else if(!isNumberValid(countSlots)){
 		errors.push('count of slots');
 	}
-	else if(!isNumberValid(casinoMoney)){
-		errors.push('casino money');
+	if(+countSlots>= +casinoMoney){
+		console.log(countSlots,casinoMoney);
+		errors.push("Slots are more than money");
 	}
 	if(errors.length==0){
 		casino=new Casino(countSlots,casinoMoney);
+		curIndex=0;
 		updateSlots();
 	}
 	else alert('Some values ('+errors.join(',')+') are incorrect');
@@ -107,6 +109,7 @@ function isNumberValid (number) {
 function createSlotMachineTemplate (slotMachine,index) {
 	var $divSlot= document.createElement('div');
 	$divSlot.classList.add('slotMachine');
+
 	if(slotMachine.getLucky())$divSlot.classList.add('lucky');
 	var $header=document.createElement('h2');
 	$header.innerText="Slot № "+ index;
@@ -145,14 +148,17 @@ function chooseSlotMachine(slotMachine,index){
 function startRuletka (userMoney) {
 	var ruletka=$modalWindow.querySelectorAll('.slots .slotNumber');
 	var result = currentSlotMachine.play(userMoney);
+  ///////////
 
-//add ruletka
 	ruletka[0].innerHTML=result.randNumber[0];
 	ruletka[1].innerHTML=result.randNumber[1];
 	ruletka[2].innerHTML=result.randNumber[2];
-
+  rotateNumber(0,result.randNumber[0]);
+  rotateNumber(1,result.randNumber[1]);
+  rotateNumber(2,result.randNumber[2]);
+  console.log('money',result.winMoney);
 	user.takeWinMoney(result.winMoney);
-	updateCurrentSlotMoney();
+	//updateCurrentSlotMoney();
 }
 function updateSlots() {
 	var $slotsContainer=document.getElementById('slots');
@@ -175,5 +181,27 @@ function updateCurrentSlotMoney(){
 function addSlot(){
 	casino.addNewSlot();
 	updateSlots();
-	//updateCurrentSlotMoney();
+	$modalWindow.classList.add('hidden');
 }
+function rotateNumber(slotNumber,winNumber){
+  var $slot=$modalWindow.querySelectorAll('.slots .slotNumber');
+  var countOfRotation=Math.floor(Math.random()*(15-11)+10)*10;//[10,15]
+
+  var curPosY=0;
+  var timer = setInterval(function () {
+
+     $slot[slotNumber].style.backgroundPositionY=curPosY+'px';
+     curPosY-=40;
+
+    if(--countOfRotation<0){
+      curPosY=(10-winNumber)*80-5;
+      $slot[slotNumber].style.backgroundPositionY=curPosY+'px';
+      updateCurrentSlotMoney();
+     clearInterval(timer);
+    }
+  }, 40);
+
+}
+
+
+updateSlots()

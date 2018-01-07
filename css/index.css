@@ -68,7 +68,6 @@ margin: 5px;
 .btn-next{
 
 }
-
 #slots{
 	display: flex;
 	flex-direction: row;
@@ -123,22 +122,41 @@ margin: 5px;
 	transform: scale(2);
 
 }
+/*slots end*/
+/*Modal window start*/
 #modalWindow.hidden{
 	display:none;
 }
 #modalWindow{
-	display:flex;
-	flex-direction: row;
-	text-align: center;
+  position: fixed;
+  top:0px;
+  left:0;
+  width: 100%;
+  height: 100vh;
+  padding: 15%;
+  background-color: rgba(100,100,100,.85);
 	justify-content: space-around;
 }
+.modalWindow-container{
+  display:flex;
+  background-color: green;
+  flex-direction:column;
+  text-align: center;
+  width: 70%;
+  height: 30vh;
+}
 .slots{
-	border:1px solid red;
+  background-color: grey;
 	display: flex;
 	justify-content: space-around;
 }
 .slotNumber{
-	border:1px solid red;
+  background-image: url(../img/slotNumbers.png);
+  background-repeat: repeat-y;
+
+  background-position-y: 800px;
+  background-position-x: 2px;
+
 	height: 50px;
 	min-width: 30px;
 	padding: 10px;

@@ -12,7 +12,7 @@ function SlotMachine(startMoney){
 		_money= +number;
 	}
 
-	this.getLucky=function () {
+	this.getLucky=function (){
 		return _lucky;
 	}
 	this.setLucky=function(isLucky){

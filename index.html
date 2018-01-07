@@ -41,31 +41,32 @@
 		</div>
 		<button onclick="addSlot()">Add New Slot</button>
 	</section>
+
 	<section id="modalWindow" class="hidden">
-		<button class="btnClose">X</button>
-		<div>
-			<h2>Slot: <span>0</span></h2>
-			<h4>Monney in Slot: <span>0</span></h4>
-			<h4>Your Money in Slot <span>0</span></h4>
-		</div>
-		<div class="slots">
-			<div class="slotNumber">1</div>
-			<div class="slotNumber">2</div>
-			<div class="slotNumber">3</div>
-			<button class="btnPlay" disabled>Play</button>
-		</div>
 
-		<form id="usersBet">
-			<label for="inpUserMoney">User`s Bet: </label>
-			<input type="number" id="inpUserMoney" min="1" value="1">
-			<input type="submit" class="btn" value="Insert Money">
-		</form>
+    <div class="modalWindow-container">
+       <button class="btnClose">X</button>
+      <div>
+       <h2>Slot: <span>0</span></h2>
+       <h4>Monney in Slot: <span>0</span></h4>
+       <h4>Your Money in Slot <span>0</span></h4>
+     </div>
+     <div class="slots">
+       <div class="slotNumber" style="background-position-y:0px">1</div>
+       <div class="slotNumber">2</div>
+       <div class="slotNumber">3</div>
+       <button class="btnPlay" disabled>Play</button>
+     </div>
 
-
-
-	</section>
-	<script src="js/slotMachine.js"></script>
-	<script src="js/casino.js"></script>
-	<script src="js/app.js"></script>
+     <form id="usersBet">
+       <label for="inpUserMoney">User`s Bet: </label>
+       <input type="number" id="inpUserMoney" min="1" value="1">
+       <input type="submit" class="btn" value="Insert Money">
+     </form>
+   </div>
+ </section>
+ <script src="js/slotMachine.js"></script>
+ <script src="js/casino.js"></script>
+ <script src="js/app.js"></script>
 </body>
 </html>
