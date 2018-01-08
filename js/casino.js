@@ -2,14 +2,20 @@ function Casino(countSlotM,startMoney){
 	var _money=startMoney;
 	var _slotMachines=[];
 
-	var avgMoney;
+	var avgMoney=Math.floor(startMoney/countSlotM);
 	for (var i = countSlotM-1; i > 0; i--) {
-		avgMoney = (startMoney/countSlotM).toFixed()-1;
 		_slotMachines[i]=new SlotMachine(avgMoney);
+    startMoney-=avgMoney;
 	}
-	_slotMachines[0]=new SlotMachine(startMoney-(countSlotM-1)*avgMoney);
+	_slotMachines[0]=new SlotMachine(startMoney);
 
-	this.getMoney=function(){return _money;}
+	this.getMoney=function(){
+    var sum=0;
+    for(var el of _slotMachines){
+      sum+=el.getMoney();
+    }
+    return sum;
+  }
 	this.setMoney=function(number){
 		 _money=number;
 	}
@@ -40,7 +46,7 @@ Casino.prototype.removeSlot = function(number) {
 	}
 	this.getSlotMachines()[0].insertMoney(sum);
 };
-Casino.prototype.RemoveMoney = function(number) {
+Casino.prototype.removeMoney = function(number) {
 	if(number>=this.getMoney())return new Error('casino don`t have this money');
 	else{
 		var sortSlots = this.getSlotMachines().sort(function(a,b){

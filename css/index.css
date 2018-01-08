@@ -166,6 +166,10 @@ margin: 5px;
   color:white;
   font-weight: bold;
  }
+ .info-win{
+  animation: win 1s infinite;
+
+ }
 
 .slots{
   background-color: grey;
@@ -194,6 +198,17 @@ margin-top: 40px;
   font-size: 20px;
   padding: 5px;
 }
+
+@keyframes win {
+    0%,100%{
+      opacity: 0;
+    }
+    50%{
+      opacity: 1;
+    }
+
+   }
+
 
 @keyframes pulse {
 	to {

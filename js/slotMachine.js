@@ -50,7 +50,7 @@ SlotMachine.prototype.play = function(number){
 	if(randNumber.toString()==[7,7,7].toString()){//win
 		winMoney=this.removeMoney(+this.getMoney());
 	}
-	else if(randNumber[0]==randNumber[1]==randNumber[2]){
+	else if(randNumber[0]==randNumber[1]&&randNumber[1]==randNumber[2]){
 		winMoney=this.removeMoney(number*5);
 	}
 	else if(randNumber[0]==randNumber[1]||randNumber[1]==randNumber[2]||

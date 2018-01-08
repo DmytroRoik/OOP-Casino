@@ -1,17 +1,17 @@
 var user={
-	money: 1000,
+	money: 0,
 	isMoneyInsertedToSlot: function (slot,money) {
     if(this.money-money<0)return false;
-		this.money-= +money;
-		slot.insertMoney(money);
+    this.money-= +money;
+    slot.insertMoney(money);
     return true;
-	},
-	takeWinMoney: function (money) {
-		if(money>0)	this.money+= +money;
-	}
+  },
+  takeWinMoney: function (money) {
+    if(money>0)	this.money+= +money;
+  }
 }
 
-var casino=new Casino(2,1000);
+var casino=null;
 
 var currentSlotMachine=null;
 var currentSlotIndex=null;
@@ -27,6 +27,8 @@ var $modalBtnPlay=$modalWindow.querySelector('button.btnPlay');
 var $inputUserBet=document.getElementById('inpUserMoney');
 var $btnInsertMoneyForm=document.getElementById('usersBet');
 var $btnCloseModalWindow=$modalWindow.getElementsByClassName('btnClose')[0];
+var $slotsSection=document.getElementsByClassName('divslotContainer')[0].parentElement;
+
 
 var init=(function(){
 	//events
@@ -36,7 +38,7 @@ var init=(function(){
       this.setAttribute('max', user.money);
     }
     else this.disabled=true;
-	});
+  });
 	$btnInsertMoneyForm.addEventListener('submit',function () {
 		event.preventDefault();
 		userBet += parseInt($inputUserBet.value);
@@ -45,7 +47,7 @@ var init=(function(){
       updateModalWindow();
     }
 
-	});
+  });
 	$modalBtnPlay.addEventListener('click',function () {
 		this.disabled=true;
 		startRuletka(userBet);
@@ -74,8 +76,10 @@ function createCasino(){
 		casino=new Casino(countSlots,casinoMoney);
 		curIndex=0;
 		updateSlots();
-	}
-	else alert('Some values ('+errors.join(',')+') are incorrect');
+    $slotsSection.classList.remove('hidden')
+  }
+  else alert('Some values ('+errors.join(',')+') are incorrect');
+  updateSlots();
 }
 function createPlayer () {
 	var playerMoney=document.getElementById('inputPlayerMoney').value;
@@ -85,13 +89,15 @@ function createPlayer () {
 
 }
 function nextSlots(){
-	 curIndex+=slotStep;
-	showFewSlots(curIndex,slotStep);
+  curIndex+=slotStep;
+  showFewSlots(curIndex,slotStep);
 }
+
 function prevSlots() {
 	if(curIndex-slotStep>=0)curIndex-=slotStep;
 	showFewSlots(curIndex,slotStep);
 }
+
 function showFewSlots (index,count) {
 	var $slots=document.getElementsByClassName('slotMachine');
 	if(index>=$slots.length)curIndex=index-=count;
@@ -109,6 +115,7 @@ function isNumberValid (number) {
 	for(let i=0;i<number.length;i++){
 		if(!/^[0-9]/.test(number[i]))return false;
 	}
+
 	return true;
 }
 
@@ -125,16 +132,20 @@ function createSlotMachineTemplate (slotMachine,index) {
 	$btnPlay.innerText="Play";
 	$btnPlay.classList.add('btn-pulse');
 	$btnPlay.addEventListener('click',function(){
-		chooseSlotMachine(slotMachine,index);
+    if(user.money<=0){
+      alert('You have create new User(Insert player money)');
+      return;
+    }
+    chooseSlotMachine(slotMachine,index);
     updateModalWindow();
-		$modalWindow.classList.remove('hidden');
-	});
+    $modalWindow.classList.remove('hidden');
+  });
 	$btnDestroy=document.createElement('button');
 	$btnDestroy.innerText='Delete';
 	$btnDestroy.addEventListener('click',function(){
 		casino.removeSlot(index);
 		updateSlots();
-
+    updateHeaderInfo();
 		$modalWindow.classList.add('hidden');
 	});
 
@@ -151,12 +162,12 @@ function chooseSlotMachine(slotMachine,index){
     $slot[i].style.backgroundPositionY=posY+'px';
   }
   currentSlotMachine=slotMachine;
-	var $spans=$modalWindow.querySelectorAll('span');
-	$spans[0].innerText=index;
-	$spans[1].innerText=slotMachine.getMoney();
-	$spans[2].innerText=userBet;
+  var $spans=$modalWindow.querySelectorAll('span');
+  $spans[0].innerText=index;
+  $spans[1].innerText=slotMachine.getMoney();
+  $spans[2].innerText=userBet;
   $spans[5].innerText=user.money;
-	currentSlotIndex=index;
+  currentSlotIndex=index;
 }
 
 function startRuletka (userMoney) {
@@ -167,26 +178,28 @@ function startRuletka (userMoney) {
   rotateNumber(0,result.randNumber[0]);
   rotateNumber(1,result.randNumber[1]);
   rotateNumber(2,result.randNumber[2]);
-	user.takeWinMoney(result.winMoney);
+  user.takeWinMoney(result.winMoney);
   userWin=result.winMoney;
   setTimeout(function () {
     if(userWin>0) showWinLoseMessage(true);
     else showWinLoseMessage(false);
     updateModalWindow();
+    updateHeaderInfo();
   },6000);
   console.log(userWin,usersBet);
 }
-function updateSlots() {
-	var $slotsContainer=document.getElementById('slots');
-	$slotsContainer.innerHTML='';
+function updateSlots() {//rebuild slot section
+	var $slotsSection=document.getElementById('slots');
+	$slotsSection.innerHTML='';
 	for (var i = 0; i< casino.getSlotMachines().length;i++) {
 		var el=casino.getSlotMachines()[i];
 		if(el){
-			$slotsContainer.append(createSlotMachineTemplate(el,i+1));
+			$slotsSection.append(createSlotMachineTemplate(el,i+1));
 		}
 	}
 	showFewSlots(curIndex,slotStep);
 }
+
 function updateModalWindow(){
 	var $spans=$modalWindow.querySelectorAll('span');
 	$spans[1].innerHTML=''+currentSlotMachine.getMoney();
@@ -196,10 +209,18 @@ function updateModalWindow(){
   $spans[5].innerHTML=''+user.money;
   $inputUserBet.disabled=false;
 }
+function updateHeaderInfo(argument) {
+  var $inputs=document.querySelectorAll('header input[type=number]');
+  $inputs[0].value=casino.getMoney();
+  $inputs[1].value=casino.getCountSlotMachine();
+  $inputs[3].value=user.money;
+}
 function addSlot(){
 	casino.addNewSlot();
 	updateSlots();
+  updateHeaderInfo();
 }
+
 function rotateNumber(slotNumber,winNumber){
   var $slot=$modalWindow.querySelectorAll('.slots .slotNumber');
   var countOfRotation=Math.floor(Math.random()*(15-11)+10)*10;//[10,15]
@@ -207,16 +228,17 @@ function rotateNumber(slotNumber,winNumber){
   var curPosY=0;
   var timer = setInterval(function () {
 
-     $slot[slotNumber].style.backgroundPositionY=curPosY+'px';
-     curPosY-=40;
+   $slot[slotNumber].style.backgroundPositionY=curPosY+'px';
+   curPosY-=40;
 
-    if(--countOfRotation<0){
-      curPosY=(10-winNumber)*80-5;
-      $slot[slotNumber].style.backgroundPositionY=curPosY+'px';
-     clearInterval(timer);
-    }
-  }, 40);
+   if(--countOfRotation<0){
+    curPosY=(10-winNumber)*80-5;
+    $slot[slotNumber].style.backgroundPositionY=curPosY+'px';
+    clearInterval(timer);
+  }
+}, 40);
 }
+
 function showWinLoseMessage(isWin)
 {
   var $tablo=$modalWindow.querySelectorAll('.info-win h2 span');
@@ -224,13 +246,21 @@ function showWinLoseMessage(isWin)
     $tablo[0].innerHTML='You win!!!';
     $tablo[1].innerHTML=''+userWin+' $';
   }else{
-     $tablo[0].innerHTML='You lose!!!';
-     $tablo[1].innerHTML=''+ userWin+' $';
-  }
-  $modalWindow.querySelector('.info-win').classList.remove('hidden');
-
+   $tablo[0].innerHTML='You lose!!!';
+   $tablo[1].innerHTML=''+ userWin+' $';
+ }
+ $modalWindow.querySelector('.info-win').classList.remove('hidden');
 }
 
-
-
-updateSlots()
+function removeMoney(){
+  var value=document.getElementById('inputRemoveCasinoMoney').value;
+  if(isNumberValid(value)&&casino){
+    if(+value>casino.getMoney())alert('Remove money is so big');
+    else casino.removeMoney(value);
+  }
+  else{
+    alert('money value is incorrect or casino doesn`t create');
+  }
+  updateHeaderInfo();
+  updateSlots();
+}

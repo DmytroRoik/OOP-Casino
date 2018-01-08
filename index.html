@@ -17,63 +17,72 @@
 				<label for="inputCasinoSlots">Casino Slots:</label>
 				<input type="number" min="1" id="inputCasinoSlots">
 			</li>
-			<button onclick="createCasino()" class="createObj">Create Casino</button>
-		</ul>
-		<ul class="player">
-			<li>
-				<h2>Player:</h2>
-			</li>
-			<li class="info-money">
-				<label for="inputPlayerMoney">Player Money: <input type="number" min="1" id="inputPlayerMoney"> </label>
-			</li>
-			<li><button class="createObj" onclick="createPlayer()">Change Player</button> </li>
-		</ul>
-	</header>
-	<section class="container">
-		<h1>Slots</h1>
-		<div class="divslotContainer">
-			<button class="btn-prev" onclick="prevSlots()">back</button>
+      <li>
+       <button onclick="createCasino()" class="createObj">Create Casino</button>
+     </li>
 
-			<div id="slots" class="container">
+     <li class="casino-removeMoney">
+      <label for="inputRemoveCasinoMoney">Remove money:</label>
+      <input type="number" min="1" id="inputRemoveCasinoMoney">
+      <button onclick="removeMoney()" class="createObj">Remove money</button>
 
-			</div>
-			<button class="btn-next" onclick="nextSlots()">Next</button>
-		</div>
-		<button onclick="addSlot()">Add New Slot</button>
-	</section>
+    </li>
+  </ul>
+  <ul class="player">
+   <li>
+    <h2>Player:</h2>
+  </li>
+  <li class="info-money">
+    <label for="inputPlayerMoney">Player Money: <input type="number" min="1" id="inputPlayerMoney"> </label>
+  </li>
+  <li><button class="createObj" onclick="createPlayer()">Change Player</button> </li>
+</ul>
+</header>
+<section class="container hidden">
+  <h1>Slots</h1>
+  <div class="divslotContainer">
+   <button class="btn-prev" onclick="prevSlots()">back</button>
 
-	<section id="modalWindow" class="hidden">
+   <div id="slots" class="container">
 
-    <div class="modalWindow-container">
-     <button class="btnClose">X</button>
-     <div class="info">
-      <div class="info-slot">
-       <h2>Slot: <span>0</span></h2>
-       <h3>Money in Slot: <span>0</span></h3>
-       <h3>Your Bet <span>0</span></h3>
-     </div>
-     <div class="info-win hidden">
-       <h2><span></span></h2>
-       <h2 id="winMoney"><span>0</span></h2>
-     </div>
-     <div class="info-user">
-      <h2>User: </h2>
-       <h3>Total user`s money: <span></span>$</h3>
-     </div>
    </div>
-   <div class="slots">
-     <div class="slotNumber" style="background-position-y:0px"></div>
-     <div class="slotNumber"></div>
-     <div class="slotNumber"></div>
-     <button class="btnPlay btn-pulse" disabled>Play</button>
-   </div>
-
-   <form id="usersBet">
-     <label for="inpUserMoney">User`s Bet: </label>
-     <input type="number" id="inpUserMoney" min="1" value="1">
-     <input type="submit" class="btn" value="Insert Money">
-   </form>
+   <button class="btn-next" onclick="nextSlots()">Next</button>
  </div>
+ <button onclick="addSlot()">Add New Slot</button>
+</section>
+
+<section id="modalWindow" class="hidden">
+
+  <div class="modalWindow-container">
+   <button class="btnClose">X</button>
+   <div class="info">
+    <div class="info-slot">
+     <h2>Slot: <span>0</span></h2>
+     <h3>Money in Slot: <span>0</span></h3>
+     <h3>Your Bet <span>0</span></h3>
+   </div>
+   <div class="info-win hidden">
+     <h2><span></span></h2>
+     <h2 id="winMoney"><span>0</span></h2>
+   </div>
+   <div class="info-user">
+    <h2>User: </h2>
+    <h3>Total user`s money: <span></span>$</h3>
+  </div>
+</div>
+<div class="slots">
+ <div class="slotNumber" style="background-position-y:0px"></div>
+ <div class="slotNumber"></div>
+ <div class="slotNumber"></div>
+ <button class="btnPlay btn-pulse" disabled>Play</button>
+</div>
+
+<form id="usersBet">
+ <label for="inpUserMoney">User`s Bet: </label>
+ <input type="number" id="inpUserMoney" min="1" value="1">
+ <input type="submit" class="btn" value="Insert Money">
+</form>
+</div>
 </section>
 <script src="js/slotMachine.js"></script>
 <script src="js/casino.js"></script>
