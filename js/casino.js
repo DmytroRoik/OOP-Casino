@@ -8,7 +8,8 @@ function Casino(countSlotM,startMoney){
     startMoney-=avgMoney;
 	}
 	_slotMachines[0]=new SlotMachine(startMoney);
-
+  var _luckySlotIndex=Math.floor(Math.random()*_slotMachines.length);
+  _slotMachines[_luckySlotIndex].setLucky(true);
 	this.getMoney=function(){
     var sum=0;
     for(var el of _slotMachines){

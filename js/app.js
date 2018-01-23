@@ -54,6 +54,7 @@ var init=(function(){
 		userBet=0;
 	});
 	$btnCloseModalWindow.addEventListener('click', function () {
+    //alert(1123)
 		$modalWindow.classList.add('hidden');
 	});
 

@@ -3,7 +3,8 @@
 	margin:0 auto;
 }
 body{
-  background-image: url('../img/bg.jpeg');
+  background-image: url(http://oh-aguilera.com/wp-content/uploads/2017/11/3.jpg);
+  background-position: center top;
   -webkit-background-size: cover;
   background-size: cover;
   background-repeat: no-repeat;
@@ -86,7 +87,6 @@ section> h1{
 .btn-prev,.btn-next,.btn-addSlot{
   background-color: rgba(200,200,10,.6);
   border-radius: 100%;
-  user-select: none;
   border: none;
 	align-self: center;
   width: 60px;
@@ -131,6 +131,7 @@ section> h1{
 }
 .slotMachine button{
 	opacity: 0;
+  font-size: 12px;
 }
 .slotMachine:hover{
 	background-color: rgba(190,200,129,.9);
@@ -144,6 +145,9 @@ section> h1{
 	margin: 15% 25%;
 	width: 50%;
 	transform: scale(2);
+}
+.lucky{
+  background-color: green;
 }
 /*slots end*/
 /*Modal window start*/
