@@ -2,25 +2,47 @@
 	width:75%;
 	margin:0 auto;
 }
+body{
+  background-image: url('../img/bg.jpeg');
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+
+}
+button{
+  font-weight: bold;
+  font-size: 16px;
+}
 ul{
 	list-style: none;
 }
 h1,h2{
 	text-align: center;
 }
+input{
+  min-height: 20px;
+}
 .hidden{
 	display: none;
 }
 /*header start*/
 header{
-	display: flex;
-	justify-content: space-around;
-	align-items: stretch;
-	flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  color: lightgrey;
+  font-weight: bold;
 }
+header h2{
+  margin: 0;
+  color: white;
+}
+
 .casino,.player{
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .casino input,.player input{
 	width: 80%;
@@ -28,7 +50,7 @@ flex-direction: column;
 	margin:5px 0;
 }
 input:focus{
-padding: 10px;
+  padding: 10px;
 }
 input:invalid{
 	border:2px dashed red;
@@ -39,9 +61,8 @@ input:valid{
 	border-bottom: 1px solid green;
 }
 .casino label,.player label{
-font-size: 20px;
-margin: 5px;
-
+  font-size: 20px;
+  margin: 5px;
 }
 
 .createObj{
@@ -49,26 +70,40 @@ margin: 5px;
 	text-align: center;
 	padding: 10px;
 	width: 150px;
-	background-color: rgba(150,150,100,.4);
+	background-color: rgba(150,150,100,.9);
 }
 /*header end*/
 /*slot section*/
+section> h1{
+  color: white;
+  font-size: 60px;
+  letter-spacing: 15px;
+}
 .divslotContainer{
 	display: flex;
 	flex-direction: row;
 }
-.btn-prev,.btn-next{
-	width: 60px;
-	height: 60px;
+.btn-prev,.btn-next,.btn-addSlot{
+  background-color: rgba(200,200,10,.6);
+  border-radius: 100%;
+  user-select: none;
+  border: none;
 	align-self: center;
-}
-
-.btn-prev{
+  width: 60px;
+  height: 60px;
+  background-image: url(http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/black-inlay-crystal-clear-bubble-icons-media/001497-black-inlay-crystal-clear-bubble-icon-media-a-media21-arrow-back.png);
+  background-size: cover;
 }
 .btn-next{
+  transform: scale(-1, 1)
+}
+.btn-addSlot{
+  background-image: url(https://www.shareicon.net/data/2016/08/18/809318_add_512x512.png);
 
 }
 #slots{
+  padding: 10px;
+  background-color: rgba(100,100,100,.15);
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -81,15 +116,14 @@ margin: 5px;
 	padding: 3px;
 	background-color: darkred;
 	box-shadow: 0 0 0 0 blue;
-	animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1); }
 }
 .btn-pulse:hover{
-    background-color: transparent;
- }
+  background-color:rgba(222,122,122,.5);
+}
 
 .slotMachine{
-	width:100px;
-	height: 170px;
+	width:125px;
+	height: 200px;
 	margin: 15px;
 	padding: 20px;
 	background-color: lightgrey;
@@ -110,7 +144,6 @@ margin: 5px;
 	margin: 15% 25%;
 	width: 50%;
 	transform: scale(2);
-
 }
 /*slots end*/
 /*Modal window start*/
@@ -123,61 +156,66 @@ margin: 5px;
   left:0;
   width: 100%;
   height: 100vh;
-  padding: 15%;
+  padding: 10% 15% 0 15%;
   background-color: rgba(100,100,100,.85);
-	justify-content: space-around;
+  justify-content: space-around;
 }
 .modalWindow-container{
+  background-image: url(http://slotopaint.com/wp-content/uploads/2016/05/Mafia-hunt_slide_09.jpg);
+  background-size: cover;
+
   display:flex;
+  border-radius: 10px;
   background-color: darkgreen;
   color: white;
   font-size: 18px;
   flex-direction:column;
   text-align: center;
   width: 70%;
-  min-width: 300px;
-  height: 40vh;
+  padding: 30px;
+  min-width: 400px;
 }
 .btnClose{
+  position: relative;
+  top:-15px;
+  left:15px;
   width: 25px;
   height: 25px;
-  margin: 5px;
   align-self: flex-end;
 }
 
- .btnPlay{
+.btnPlay{
   padding: 10px;
   font-size: 25px;
 }
- .btnPlay:hover{
+.btnPlay:hover{
   background-color: red;
   color:white;
- }
- .btnPlay:disabled{
+}
+.btnPlay:disabled{
   animation: none;
   background-color: lightgrey;
- }
- .info{
+}
+.info{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
- }
- .info span{
+}
+.info span{
   color:white;
   font-weight: bold;
- }
- .info-win{
+}
+.info-win{
   animation: win 1s infinite;
-
- }
-
+}
 .slots{
-  background-color: grey;
-	display: flex;
+  background-color: rgba(100,100,100,.5);
+  display: flex;
+  padding: 10px 30px 10px 0;
+  border-radius: 5px;
   flex-direction: row;
-	justify-content: center;
-  margin:0;
-  border:1px solid red;
+  justify-content: center;
+  margin:0 auto;
   height: 100px;
 }
 .slotNumber{
@@ -187,31 +225,28 @@ margin: 5px;
   background-position-y: 800px;
   background-position-x: 2px;
   margin:10px 40px;
-	height: 50px;
+  height: 60px;
   min-width: 30px;
-	padding: 10px;
+  padding: 10px;
+
 }
 #usersBet{
-margin-top: 40px;
+  margin-top: 40px;
 }
 #usersBet input,#usersBet label{
   font-size: 20px;
   padding: 5px;
 }
+#inpUserMoney{
+  width:100px;
+}
 
 @keyframes win {
-    0%,100%{
-      opacity: 0;
-    }
-    50%{
-      opacity: 1;
-    }
+  0%,100%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
 
-   }
-
-
-@keyframes pulse {
-	to {
-		-webkit-box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
-		box-shadow: 0 0 0 10px rgba(232, 76, 61, 0); } }
-
+}

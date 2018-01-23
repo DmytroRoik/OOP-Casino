@@ -53,9 +53,7 @@ Casino.prototype.removeMoney = function(number) {
 			if(a.getMoney()<b.getMoney())return -1;
 			else if(a.getMoney()>b.getMoney()) return 1;
 			else return 0;
-
 		});
-		console.log(sortSlots[sortSlots.length-1].getMoney(),sortSlots[0].getMoney());
 		var sum=number;
 		for(var i=sortSlots.length-1;i>=0;i--){
 			if(sortSlots[i].getMoney()<=sum){

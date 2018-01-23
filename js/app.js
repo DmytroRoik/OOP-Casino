@@ -95,12 +95,13 @@ function nextSlots(){
 
 function prevSlots() {
 	if(curIndex-slotStep>=0)curIndex-=slotStep;
+  else curIndex=casino.getSlotMachines().length-slotStep;
 	showFewSlots(curIndex,slotStep);
 }
 
 function showFewSlots (index,count) {
 	var $slots=document.getElementsByClassName('slotMachine');
-	if(index>=$slots.length)curIndex=index-=count;
+	if(index>=$slots.length)index=curIndex=0;
 	for($el of $slots){
 		$el.classList.add('hidden');
 	}
@@ -185,7 +186,7 @@ function startRuletka (userMoney) {
     else showWinLoseMessage(false);
     updateModalWindow();
     updateHeaderInfo();
-  },6000);
+  },1500);
   console.log(userWin,usersBet);
 }
 function updateSlots() {//rebuild slot section
@@ -223,7 +224,7 @@ function addSlot(){
 
 function rotateNumber(slotNumber,winNumber){
   var $slot=$modalWindow.querySelectorAll('.slots .slotNumber');
-  var countOfRotation=Math.floor(Math.random()*(15-11)+10)*10;//[10,15]
+  var countOfRotation=Math.floor(Math.random()*(9-4)+3)*3;//[9,2]
 
   var curPosY=0;
   var timer = setInterval(function () {
